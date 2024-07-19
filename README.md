@@ -467,13 +467,19 @@ Endpoint = localhost:51820
 PersistentKeepalive = 20
 ```
 
-Add a default route to your server, as your AllowedIps are catch-all, it is to avoid the traffic looping.
+Add a route to your wstunnel server on your local computer(if the wstunnel and wireguard client are on the same computer), as your AllowedIps are catch-all, it is to avoid the traffic looping.
 
+####Linux
 ```bash
 sudo ip route add ip.of.my.server.com dev eth0 via 192.168.0.1
 # replace eth0 (interface) and 192.168.0.1 (router gateway) by the one given by `ip route get ip.of.my.server.com` 
 ```
+####Windows
+```bash
+route add ip.of.my.server.com MASK 255.255.255.255 192.168.0.1
+# replace 192.168.0.1 (router gateway) by the default route given by `route print` 
 
+####Mac
 start your wireguard, and it should be working
 
 ```
